@@ -28,7 +28,9 @@
     <main class="container mt-4">
         <h1>Welcome to Synergy Pro</h1>
         {% block content %}
-            {% include 'tasks/calendar.html' %}
+            {% if user.is_authenticated %}
+                {% include 'tasks/calendar.html' %}
+            {% endif %}
         {% endblock %}
     </main>
     <footer class="footer mt-auto py-3 bg-light">
