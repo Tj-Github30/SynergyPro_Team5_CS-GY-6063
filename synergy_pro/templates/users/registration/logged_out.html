@@ -1,0 +1,10 @@
+{% extends "synergy_pro/base.html" %}
+
+{% block title %}Logged Out{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>You have been logged out successfully</h2>
+    <p><a href="{% url 'login' %}">Click here to log in again</a></p>
+</div>
+{% endblock %}
