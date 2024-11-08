@@ -9,8 +9,9 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             # login(request, user)  # Automatically log the user in after signup
+            print(f"User {user.username} created and logged in.")  # Debug line
             messages.success(request, "Account created successfully!")
-            return redirect('users/login.html')  # Redirect to the homepage after signup
+            return redirect('users/registration/login.html')  # Redirect to the homepage after signup
     else:
         form = UserRegisterForm()
     return render(request, 'users/registration/signup.html', {'form': form})
