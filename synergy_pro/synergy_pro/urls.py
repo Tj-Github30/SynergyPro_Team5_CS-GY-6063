@@ -1,5 +1,5 @@
 """
-URL configuration for task_management project.
+URL configuration for synergy_pro project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.1/topics/http/urls/
@@ -14,11 +14,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
 from django.contrib import admin
 from django.urls import path, include
+from django.shortcuts import render
+
+def home(request):
+    return render(request, 'synergy_pro/base.html')
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path('', include('task_manager.urls')),
+    path('admin/', admin.site.urls),
+    path('users/', include('users.urls')),
+    path('tasks/', include('tasks.urls')),
+    path('', home, name='home'),  # Root URL pattern
 ]

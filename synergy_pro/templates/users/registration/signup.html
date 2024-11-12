@@ -1,0 +1,98 @@
+{% extends "synergy_pro/base.html" %}
+{% load crispy_forms_tags %}  <!-- Load crispy forms here -->
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="card p-4 shadow-lg" style="width: 100%; max-width: 500px;">
+        <h2 class="mb-4 text-center">Sign Up</h2>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        
+        <form method="post" id="signupForm">
+            {% csrf_token %}
+            <div class="container">
+                <div class="row">
+                  <div class="col">
+                    <div class="mb-3">
+                        <label for="id_username" class="form-label">Username</label>
+                    </div>
+                  </div>
+                  <div class="col">
+                    {{ form.username }}
+                  </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="id_email" class="form-label">Email</label>
+                           
+                        </div>
+                    </div>
+                    <div class="col">
+                        {{ form.email }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="id_password1" class="form-label">
+                                Password
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col" style="display: inline-flex;">
+                        <div>
+                            {{ form.password1 }}
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16"
+                                data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Your password must contain at least 8 characters, and cannot be entirely numeric or too similar to your personal information.">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                              </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="id_password2" class="form-label">Confirm Password</label>
+                           
+                        </div>
+                    </div>
+                    <div class="col">
+                        {{ form.password2 }}
+                    </div>
+                </div>
+
+
+              </div>
+            <button type="submit" class="btn btn-primary w-100">Register</button>
+        </form>
+    </div>
+</div>
+
+<script>
+document.getElementById('signupForm').addEventListener('submit', function(event) {
+    const password1 = document.getElementById('id_password1').value;
+    const password2 = document.getElementById('id_password2').value;
+    if (password1 !== password2) {
+        event.preventDefault();
+        alert('Passwords do not match. Please try again.');
+    } else {
+        alert('Account created successfully!');
+    }
+});
+</script>
+{% endblock %}
