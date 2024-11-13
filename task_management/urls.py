@@ -1,24 +1,16 @@
-"""
-URL configuration for task_management project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
+from .views import auth_views, contact_views, dashboard_views
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path('', include('task_manager.urls')),
+
+    path('', auth_views.home_view, name='home'),
+    # Authentication URLs
+    path('api/signup/', auth_views.signup_view, name='signup'),
+    path('api/login/', auth_views.login_view, name='login'),
+    path('api/logout/', auth_views.logout_view, name='logout'),
+
+    # Contact URLs
+    path('api/contact/', contact_views.submit_query, name='submit_query'),
+
+    path('dashboard/individual/student/', dashboard_views.individual_student_dashboard, name='individual_student_dashboard'),
 ]
